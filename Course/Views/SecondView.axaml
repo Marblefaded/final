@@ -1,0 +1,104 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Course.Views.SecondView">
+  <UserControl.Styles>
+    <Style Selector="ScrollViewer.sv1">
+      <Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+      <Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+      <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+    </Style>
+    <Style Selector="Button.b1">
+      <Setter Property="VerticalAlignment" Value="Stretch"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="Background" Value="#014f0f"/>
+      <Setter Property="BorderThickness" Value="1,0,0,0"/>
+      <Setter Property="BorderBrush" Value="Gray"/>
+      <Setter Property="CornerRadius" Value="0"/>
+    </Style>
+    <Style Selector="Button.b2">
+      <Setter Property="VerticalAlignment" Value="Stretch"/>
+      <Setter Property="VerticalContentAlignment" Value="Center"/>
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      <Setter Property="HorizontalContentAlignment" Value="Center"/>
+      <Setter Property="Background" Value="#014f0f"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="BorderBrush" Value="Gray"/>
+    </Style>
+
+	  <Style Selector="Button.b3">
+		  <Setter Property="VerticalAlignment" Value="Stretch"/>
+		  <Setter Property="VerticalContentAlignment" Value="Center"/>
+		  <Setter Property="HorizontalAlignment" Value="Stretch"/>
+		  <Setter Property="HorizontalContentAlignment" Value="Center"/>
+		  <Setter Property="Background" Value="#014f0f"/>
+		  <Setter Property="BorderThickness" Value="1"/>
+		  <Setter Property="BorderBrush" Value="Gray"/>
+	  </Style>
+	  
+    <Style Selector="Border.br1">
+      <Setter Property="HorizontalAlignment" Value="Stretch"/>
+      <Setter Property="VerticalAlignment" Value="Stretch"/>
+      <Setter Property="BorderThickness" Value="1"/>
+      <Setter Property="BorderBrush" Value="#f34723"/>
+    </Style>
+
+	  <Style Selector="Button.b1:pointerover /template/ ContentPresenter">
+		  <Setter Property="Background" Value="#014f0f"/>
+	  </Style>
+	  
+	<Style Selector="Button.b2:pointerover /template/ ContentPresenter">
+		<Setter Property="Background" Value="#014f0f"/>
+	</Style>
+
+	  <Style Selector="Button.b3:pointerover /template/ ContentPresenter">
+		  <Setter Property="Background" Value="#014f0f"/>
+	  </Style>
+	  
+  </UserControl.Styles>
+	<Grid ColumnDefinitions="*,2*">
+		<Border Classes="br1">
+			<Grid Grid.Column="0" RowDefinitions="*,*,*,10*,*">
+				<Button Grid.Row="0" Classes="b2" Name="SELECT" Content="Select"/>
+				<Button Grid.Row="1" Classes="b2" Name="JOIN" Content="Join"/>
+				<Button Grid.Row="2" Classes="b2" Name="GROUP" Content="Group"/>
+				<Button Grid.Row="4" Classes="b3"  Content="Назад" Command="{Binding $parent[Window].DataContext.Change}"/>
+			</Grid>
+		</Border>
+	
+	<Grid Grid.Column="1" RowDefinitions="*,*">
+		<Border Classes="br1">
+			<TextBox Grid.Row="0" Watermark="Ваш запрос" Focusable="False" Text="{Binding QueryDescription}"/>
+		</Border>
+
+		<ScrollViewer Grid.Row="1" Classes="sv1">
+			<Border Classes="br1">
+			<ItemsControl Items="{Binding MainContext.Queries}">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Border Classes="br1">
+							<Grid ColumnDefinitions="4*,*,*">
+								<TextBlock Grid.Column="0" Text="{Binding Name}"
+												   VerticalAlignment="Center"/>
+								<Button Grid.Column="1" Content="Просмотр" Classes="b1"
+														  Command="{Binding $parent[ItemsControl].DataContext.ButtonShowQuery}"
+														  CommandParameter="{Binding}"/>
+								<Button Grid.Column="2" Content="Удалить" Classes="b1"
+														  Command="{Binding $parent[ItemsControl].DataContext.ButtonDeleteQuery}"
+														  CommandParameter="{Binding}"/>
+							</Grid>
+						</Border>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+			</Border>	
+		</ScrollViewer>
+
+	</Grid>
+
+	</Grid>
+</UserControl>
